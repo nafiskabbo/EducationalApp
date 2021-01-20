@@ -5,8 +5,22 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
+
+fun View.snackbar(message: String) {
+    Snackbar.make(
+        this,
+        message,
+        Snackbar.LENGTH_LONG
+    ).also { snackbar ->
+        snackbar.setAction("Ok") {
+            snackbar.dismiss()
+        }
+    }.show()
+}
 
 fun startIntent(
     fromActivity: Activity,

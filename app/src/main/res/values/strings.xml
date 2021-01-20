@@ -1,3 +1,40 @@
 <resources>
     <string name="app_name">EducationalApp</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    // navigation
+    <string name="title_home">Home</string>
+    <string name="title_plans">Plans</string>
+    <string name="title_stats">Stats</string>
+
+
+    // registration
+    <string name="registration">Registration</string>
+    <string name="full_name">Full Name</string>
+    <string name="email_address">Email Address</string>
+    <string name="board">Board</string>
+    <string name="class_text">Class</string>
+    <string name="password_8_chars">Password (at least 8 characters)</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="invalid_email">Invalid Email Address</string>
+    <string name="invalid_password">Invalid Password</string>
+    <string name="password_doesnt_match">Password doesn\'t match</string>
+    <string name="register">Register</string>
+    <string name="already_have_an_acc">Already have an account? Login!</string>
+
+    // login
+    <string name="dont_have_acc">Don\'t have an account yet? Join Now!</string>
+    <string name="login">Login</string>
+
+
+    <!--    forgot password-->
+    <string name="forgot_pass_text">Forgot Password?</string>
+    <string name="forgot_pass_body">Don\'t worry. We just need your registered email address and it\'s done!</string>
+    <string name="provide_email_here">Provide your registered email here</string>
+    <string name="recovery_email_sent">Recovery email sent successfully! Check your Inbox.</string>
+    <string name="reset_password_text">Reset Password</string>
+    <string name="go_back_text">&lt; &lt; Go Back</string>
+    <!--    forgot password-->
+
 </resources>

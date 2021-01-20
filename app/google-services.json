@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "667010245143",
+    "project_id": "educationalapp-3f226",
+    "storage_bucket": "educationalapp-3f226.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667010245143:android:6d08a1e69c982e52ad7252",
+        "android_client_info": {
+          "package_name": "com.kabbodev.educationalapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "667010245143-dkec4gsj1e9h6pbqridsr11n12vmgenv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kabbodev.educationalapp",
+            "certificate_hash": "5791e38cc3af60274da5a57b784bb85cefe34e1b"
+          }
+        },
+        {
+          "client_id": "667010245143-ni7md38bu7fpt2e2dj2piu3bb14g4v4r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXHxV_uuqdOw4QQ5Z0TtGfROxWp3pGI18"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "667010245143-ni7md38bu7fpt2e2dj2piu3bb14g4v4r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
