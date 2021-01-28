@@ -1,12 +1,11 @@
 <resources>
-    <string name="app_name">EducationalApp</string>
+    <string name="app_name">Emadmaths</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     // navigation
     <string name="title_home">Home</string>
     <string name="title_plans">Plans</string>
     <string name="title_stats">Stats</string>
-
 
     // registration
     <string name="registration">Registration</string>
@@ -36,5 +35,36 @@
     <string name="reset_password_text">Reset Password</string>
     <string name="go_back_text">&lt; &lt; Go Back</string>
     <!--    forgot password-->
+
+    /// home frag
+    <string name="start">Start</string>
+
+    <string name="question_code" formatted="false">Question code-%1$s</string>
+    <string name="question" formatted="false">%1$s. %2$s</string>
+
+
+    <!--    plans fragment-->
+    <string name="subscribe_type">Subscribe</string>
+    <string name="subscription">Subscription</string>
+    <string name="price_1_month" formatted="false">Rs. %1$s/Month</string>
+    <string name="rs_month" formatted="false">Rs. %1$s (1 Month)</string>
+    <string name="rs_months" formatted="false">Rs. %1$s (%2$s Months)</string>
+    <string name="you_have_no_subs">You have no subscriptions now! Buy Subscriptions From Plans!</string>
+    <string name="submit">Submit</string>
+
+    <!--    on Back Pressed -->
+    <string name="alert">Alert!</string>
+    <string name="alert_on">Are you sure to exit from the exam? Without submitting, all your answers will be lost!</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="process_delete" formatted="false">%1$s and it\'s all process will be terminated.</string>
+    <string name="ok">OK</string>
+    <string name="cancel">CANCEL</string>
+    <string name="choose_your_chapters">Choose your chapters</string>
+    <string name="select_number_of_daily_que">Select number of daily questions</string>
+    <string name="download_excel_report">Download Excel Report</string>
+    <string name="daily_task">Daily Task</string>
+    <string name="my_doubts">My Doubts</string>
+    <string name="my_tests">My Tests</string>
+    <!--    on Back Pressed -->
 
 </resources>

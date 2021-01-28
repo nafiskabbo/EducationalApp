@@ -1,0 +1,11 @@
+package com.kabbodev.educational.data.model
+
+data class User(
+    val fullName: String? = "",
+    val email: String? = "",
+    val board: String? = "",
+    val class_: String? = "",
+    val password: String? = "",
+    val subscriptions: List<String> = emptyList(),
+    val subscriptionsMonth: List<String> = emptyList()
+)

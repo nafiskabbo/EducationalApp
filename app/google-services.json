@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "667010245143",
-    "project_id": "educationalapp-3f226",
-    "storage_bucket": "educationalapp-3f226.appspot.com"
+    "project_number": "662132718178",
+    "project_id": "educational-app-e85da",
+    "storage_bucket": "educational-app-e85da.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:667010245143:android:6d08a1e69c982e52ad7252",
+        "mobilesdk_app_id": "1:662132718178:android:47a936efef655a6ab32f3b",
         "android_client_info": {
-          "package_name": "com.kabbodev.educationalapp"
+          "package_name": "com.kabbodev.educational"
         }
       },
       "oauth_client": [
         {
-          "client_id": "667010245143-dkec4gsj1e9h6pbqridsr11n12vmgenv.apps.googleusercontent.com",
+          "client_id": "662132718178-21aavusttmvi6as1u8oht379n7107giq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.kabbodev.educationalapp",
+            "package_name": "com.kabbodev.educational",
             "certificate_hash": "5791e38cc3af60274da5a57b784bb85cefe34e1b"
           }
         },
         {
-          "client_id": "667010245143-ni7md38bu7fpt2e2dj2piu3bb14g4v4r.apps.googleusercontent.com",
+          "client_id": "662132718178-201kcgetgj4ll9uedm0hu01psbulmeop.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDXHxV_uuqdOw4QQ5Z0TtGfROxWp3pGI18"
+          "current_key": "AIzaSyCOBHL20B4TA6zfKG8qLvNuzAJiY8diz4c"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "667010245143-ni7md38bu7fpt2e2dj2piu3bb14g4v4r.apps.googleusercontent.com",
+              "client_id": "662132718178-201kcgetgj4ll9uedm0hu01psbulmeop.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
