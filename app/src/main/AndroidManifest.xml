@@ -8,6 +8,8 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EducationalApp">
@@ -22,8 +24,8 @@
 
         <meta-data
             android:name="com.razorpay.ApiKey"
-                    android:value="rzp_live_HmSiQSC3VqdCRh" />
-<!--            android:value="rzp_test_RtlQzyftEEapqc" />-->
+            android:value="rzp_live_HmSiQSC3VqdCRh" />
+        <!--            android:value="rzp_test_RtlQzyftEEapqc" />-->
 
         <meta-data
             android:name="preloaded_fonts"

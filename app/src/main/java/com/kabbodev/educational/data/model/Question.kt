@@ -12,5 +12,6 @@ data class Question(
     var option_3: String? = "",
     var option_3_img: String? = "",
     var option_4: String? = "",
-    var option_4_img: String? = ""
+    var option_4_img: String? = "",
+    var solve_link: String? = ""
 )

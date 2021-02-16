@@ -53,20 +53,20 @@
         app:layout_constraintStart_toEndOf="@+id/info_btn"
         app:layout_constraintTop_toTopOf="@+id/info_btn" />
 
-    <ImageButton
-        android:id="@+id/previous_btn"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="16dp"
-        android:background="?attr/selectableItemBackground"
-        android:contentDescription="@string/app_name"
-        android:padding="6dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_previous"
-        app:layout_constraintBottom_toBottomOf="@+id/info_btn"
-        app:layout_constraintEnd_toStartOf="@+id/info_btn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/info_btn" />
+<!--    <ImageButton-->
+<!--        android:id="@+id/previous_btn"-->
+<!--        android:layout_width="60dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:background="?attr/selectableItemBackground"-->
+<!--        android:contentDescription="@string/app_name"-->
+<!--        android:padding="6dp"-->
+<!--        android:scaleType="fitCenter"-->
+<!--        android:src="@drawable/ic_previous"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/info_btn"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/info_btn"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/info_btn" />-->
 
     <ImageView
         android:id="@+id/imageView5"

@@ -1,44 +1,29 @@
 package com.kabbodev.educational.ui.fragments
 
 import android.graphics.Color
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Patterns
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.navigation.NavController
 import androidx.navigation.NavOptions
-import androidx.navigation.Navigation
 import com.kabbodev.educational.R
 import com.kabbodev.educational.data.model.User
 import com.kabbodev.educational.databinding.FragmentLoginBinding
-import com.kabbodev.educational.ui.`interface`.FirebaseCallback
+import com.kabbodev.educational.ui.interfaces.FirebaseCallback
 import com.kabbodev.educational.ui.base.BaseFragment
 import com.kabbodev.educational.ui.utils.snackbar
 import com.kabbodev.educational.ui.viewModels.LoginViewModel
 
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(), FirebaseCallback {
 
-    private lateinit var navController: NavController
-
-    override fun getFragmentBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ) = FragmentLoginBinding.inflate(inflater, container, false)
+    override fun getFragmentBinding(inflater: LayoutInflater, container: ViewGroup?) =
+        FragmentLoginBinding.inflate(inflater, container, false)
 
     override fun getViewModel() = LoginViewModel::class.java
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(view)
-        setupTheme()
-        setupClickListeners()
-    }
-
-    private fun setupTheme() {
+    override fun setupTheme() {
         val textWatcher: TextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -54,7 +39,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(), Fire
         binding.passwordEt.editText?.addTextChangedListener(textWatcher)
     }
 
-    private fun setupClickListeners() {
+    override fun setupClickListeners() {
         binding.forgotPassText.setOnClickListener {
             navController.navigate(R.id.action_loginFragment_to_resetPasswordFragment)
         }
@@ -70,23 +55,19 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(), Fire
         if (binding.emailEt.editText?.text!!.isNotEmpty() &&
             binding.passwordEt.editText?.text!!.isNotEmpty()
         ) {
-            binding.loginBtn.isEnabled = true
-            binding.loginBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            with(binding.loginBtn) {
+                isEnabled = true
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            }
             return
         }
-        binding.loginBtn.isEnabled = false
-        binding.loginBtn.setTextColor(Color.argb(50, 255, 255, 255))
+        with(binding.loginBtn) {
+            isEnabled = false
+            setTextColor(Color.argb(50, 255, 255, 255))
+        }
     }
 
     private fun checkEmailAndPassword() {
-        val customErrorIcon = ContextCompat.getDrawable(requireContext(), R.drawable.error_icon)
-        customErrorIcon!!.setBounds(
-            -16,
-            0,
-            customErrorIcon.intrinsicWidth - 16,
-            customErrorIcon.intrinsicHeight
-        )
-
         if (Patterns.EMAIL_ADDRESS.matcher(binding.emailEt.editText?.text.toString()).matches()) {
             binding.emailEt.isErrorEnabled = false
 
@@ -94,22 +75,19 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(), Fire
                 binding.passwordEt.isErrorEnabled = false
 
                 binding.loginBtn.startAnimation {
-                    viewModel.login(
-                        binding.emailEt.editText?.text.toString(),
-                        binding.passwordEt.editText?.text.toString(),
-                        this
-                    )
+                    viewModel.login(binding.emailEt.editText?.text.toString(), binding.passwordEt.editText?.text.toString(), this)
                 }
-
             } else {
-                binding.passwordEt.isErrorEnabled = true
-                binding.passwordEt.error = getString(R.string.invalid_password)
-                binding.passwordEt.errorIconDrawable = customErrorIcon
+                with(binding.passwordEt) {
+                    isErrorEnabled = true
+                    error = getString(R.string.invalid_password)
+                }
             }
         } else {
-            binding.emailEt.isErrorEnabled = true
-            binding.emailEt.error = getString(R.string.invalid_email)
-            binding.emailEt.errorIconDrawable = customErrorIcon
+            with(binding.emailEt) {
+                isErrorEnabled = true
+                error = getString(R.string.invalid_email)
+            }
         }
     }
 
@@ -128,8 +106,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(), Fire
     }
 
     override fun onFailureListener(e: Exception) {
-        binding.loginBtn.revertAnimation()
-        binding.rootLayout.snackbar(e.message.toString())
+        with(binding) {
+            loginBtn.revertAnimation()
+            rootLayout.snackbar(e.message.toString())
+        }
     }
 
 }

@@ -80,7 +80,7 @@
         app:layout_constraintTop_toBottomOf="@+id/download_my_tests_btn" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/download_my_doubts_btn"
+        android:id="@+id/see_my_doubts_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -89,7 +89,7 @@
         android:layout_marginBottom="32dp"
         android:insetTop="2dp"
         android:insetBottom="2dp"
-        android:text="@string/download_excel_report"
+        android:text="@string/all_doubts"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

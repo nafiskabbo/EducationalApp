@@ -5,6 +5,10 @@ data class Plan(
     var type: String? = "",
     var title: String? = "",
     var subtitle: String? = "",
+    var class_name: String? = "",
     var price: String? = "",
-    var chapter_set: String? = ""
+    var chapter_set: String? = "",
+    var contact_info: String? = "",
+    var payment_link: String? = "",
+    var join_class_link: String? = ""
 )

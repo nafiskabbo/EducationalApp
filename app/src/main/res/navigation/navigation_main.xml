@@ -72,6 +72,14 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
 
+        <action
+            android:id="@+id/action_navigation_home_to_doubtViewFragment"
+            app:destination="@id/doubtViewFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
     </fragment>
 
     <fragment
@@ -125,12 +133,28 @@
         android:id="@+id/navigation_stats"
         android:name="com.kabbodev.educational.ui.fragments.StatsFragment"
         android:label="@string/title_stats"
-        tools:layout="@layout/fragment_stats" />
+        tools:layout="@layout/fragment_stats">
+        <action
+            android:id="@+id/action_navigation_stats_to_doubtListFragment"
+            app:destination="@id/doubtListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 
     <fragment
         android:id="@+id/plansDetailFragment"
         android:name="com.kabbodev.educational.ui.fragments.PlansDetailFragment"
-        tools:layout="@layout/fragment_plans_detail" />
+        tools:layout="@layout/fragment_plans_detail">
+        <action
+            android:id="@+id/action_plansDetailFragment_to_liveClassJoinFragment"
+            app:destination="@id/liveClassJoinFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 
     <dialog
         android:id="@+id/subscriptionBottomSheetFragment"
@@ -150,6 +174,31 @@
         app:destination="@id/subscriptionBottomSheetFragment"
         app:popUpTo="@id/subscriptionBottomSheetFragment"
         app:popUpToInclusive="true" />
+
+    <fragment
+        android:id="@+id/doubtListFragment"
+        android:name="com.kabbodev.educational.ui.fragments.DoubtListFragment"
+        android:label="Doubt List"
+        tools:layout="@layout/fragment_doubt_list">
+        <action
+            android:id="@+id/action_doubtListFragment_to_doubtViewFragment"
+            app:destination="@id/doubtViewFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/doubtViewFragment"
+        android:name="com.kabbodev.educational.ui.fragments.DoubtViewFragment"
+        android:label="Doubt View"
+        tools:layout="@layout/fragment_doubt_view" />
+    <fragment
+        android:id="@+id/liveClassJoinFragment"
+        android:name="com.kabbodev.educational.ui.fragments.LiveClassJoinFragment"
+        android:label="Live Class"
+        tools:layout="@layout/fragment_live_class_join" />
 
 
 </navigation>

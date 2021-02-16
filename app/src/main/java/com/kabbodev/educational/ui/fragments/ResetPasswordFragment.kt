@@ -1,7 +1,6 @@
 package com.kabbodev.educational.ui.fragments
 
 import android.graphics.Color
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.transition.TransitionManager
@@ -21,20 +20,12 @@ import com.kabbodev.educational.ui.viewModels.LoginViewModel
 
 class ResetPasswordFragment : BaseFragment<FragmentResetPasswordBinding, LoginViewModel>() {
 
-    override fun getFragmentBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ) = FragmentResetPasswordBinding.inflate(inflater, container, false)
+    override fun getFragmentBinding(inflater: LayoutInflater, container: ViewGroup?) =
+        FragmentResetPasswordBinding.inflate(inflater, container, false)
 
     override fun getViewModel() = LoginViewModel::class.java
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupTheme()
-        setupClickListeners()
-    }
-
-    private fun setupTheme() {
+    override fun setupTheme() {
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -46,7 +37,7 @@ class ResetPasswordFragment : BaseFragment<FragmentResetPasswordBinding, LoginVi
         binding.forgotPassEmail.addTextChangedListener(textWatcher)
     }
 
-    private fun setupClickListeners() {
+    override fun setupClickListeners() {
         binding.tvGoBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
@@ -84,14 +75,8 @@ class ResetPasswordFragment : BaseFragment<FragmentResetPasswordBinding, LoginVi
                 val animationListener = object : Animation.AnimationListener {
                     override fun onAnimationStart(animation: Animation?) {}
                     override fun onAnimationEnd(animation: Animation?) {
-                        binding.emailIconText.text =
-                            getString(R.string.recovery_email_sent)
-                        binding.emailIconText.setTextColor(
-                            ContextCompat.getColor(
-                                requireContext(),
-                                R.color.green
-                            )
-                        )
+                        binding.emailIconText.text = getString(R.string.recovery_email_sent)
+                        binding.emailIconText.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
                         TransitionManager.beginDelayedTransition(binding.emailIconContainer)
                         binding.emailIconText.visibility = View.VISIBLE
                     }
@@ -108,19 +93,9 @@ class ResetPasswordFragment : BaseFragment<FragmentResetPasswordBinding, LoginVi
             .addOnFailureListener {
                 binding.emailIcon.setImageResource(R.drawable.red_email)
                 binding.resetPassBtn.isEnabled = true
-                binding.resetPassBtn.setTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.white
-                    )
-                )
+                binding.resetPassBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                 binding.emailIconText.text = it.message
-                binding.emailIconText.setTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.red
-                    )
-                )
+                binding.emailIconText.setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
                 TransitionManager.beginDelayedTransition(binding.emailIconContainer)
                 binding.emailIconText.visibility = View.VISIBLE
                 binding.progressBar.visibility = View.GONE
@@ -130,12 +105,7 @@ class ResetPasswordFragment : BaseFragment<FragmentResetPasswordBinding, LoginVi
     private fun checkInputs() {
         if (binding.forgotPassEmail.text.isNotEmpty()) {
             binding.resetPassBtn.isEnabled = true
-            binding.resetPassBtn.setTextColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.white
-                )
-            )
+            binding.resetPassBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
             return
         }
         binding.resetPassBtn.isEnabled = false

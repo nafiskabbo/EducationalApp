@@ -13,6 +13,24 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
     </style>
 
+    <style name="EditTextStyle" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+        <item name="backgroundTint">@color/editTextBgColor</item>
+        <item name="boxBackgroundColor">@color/editTextBgColor</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="boxCornerRadiusTopStart">6dp</item>
+        <item name="boxCornerRadiusTopEnd">6dp</item>
+        <item name="boxCornerRadiusBottomStart">6dp</item>
+        <item name="boxCornerRadiusBottomEnd">6dp</item>
+        <item name="hintTextColor">@color/darkGrey</item>
+        <item name="android:textColorHint">@color/darkGrey</item>
+        <item name="errorIconDrawable">@drawable/error_icon</item>
+        <item name="errorIconTint">@color/blue</item>
+        <item name="errorTextColor">@color/blue</item>
+        <item name="startIconTint">@color/blue</item>
+    </style>
+
+
     <style name="RedProgressBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/red</item>
         <item name="colorPrimaryDark">@color/red</item>

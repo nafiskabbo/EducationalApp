@@ -1,16 +1,18 @@
 package com.kabbodev.educational.ui.activities
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
+import android.webkit.WebView
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.kabbodev.educational.R
 import com.kabbodev.educational.databinding.ActivityMainBinding
 import com.kabbodev.educational.ui.base.BaseActivity
@@ -18,21 +20,30 @@ import com.kabbodev.educational.ui.viewModels.DashboardViewModel
 import com.razorpay.PaymentData
 import com.razorpay.PaymentResultWithDataListener
 
-class MainActivity : BaseActivity<ActivityMainBinding, DashboardViewModel>(),
-    PaymentResultWithDataListener {
+class MainActivity : BaseActivity<ActivityMainBinding, DashboardViewModel>(), PaymentResultWithDataListener {
 
     private val TAG = "Subscription"
     private lateinit var navController: NavController
     private var currentFragment: Int = -1
 
-    override fun getActivityBinding(inflater: LayoutInflater) =
-        ActivityMainBinding.inflate(layoutInflater)
+    override fun getActivityBinding(inflater: LayoutInflater) = ActivityMainBinding.inflate(layoutInflater)
 
     override fun getViewModel() = DashboardViewModel::class.java
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.home_menu, menu)
+        return true
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             onBackPressed()
+        } else if (item.itemId == R.id.log_out) {
+            Firebase.auth.signOut()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -60,7 +71,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, DashboardViewModel>(),
                 id == R.id.registrationFragment ||
                 id == R.id.resetPasswordFragment ||
                 id == R.id.questionsFragment ||
-                id == R.id.resultFragment
+                id == R.id.resultFragment ||
+                id == R.id.doubtViewFragment
             ) {
                 supportActionBar?.hide()
                 if (binding.navView.visibility == View.VISIBLE) {
@@ -72,13 +84,16 @@ class MainActivity : BaseActivity<ActivityMainBinding, DashboardViewModel>(),
                 if (id == R.id.resultFragment) {
                     currentFragment = 3
                 }
+                if (id == R.id.doubtViewFragment) {
+                    currentFragment = 6
+                }
 
             } else {
                 if (id == R.id.navigation_home) {
                     currentFragment = 1
                 }
                 supportActionBar?.show()
-                if (id == R.id.plansDetailFragment) {
+                if (id == R.id.plansDetailFragment || id == R.id.liveClassJoinFragment) {
                     if (binding.navView.visibility == View.VISIBLE) {
                         binding.navView.visibility = View.GONE
                     }
@@ -130,8 +145,24 @@ class MainActivity : BaseActivity<ActivityMainBinding, DashboardViewModel>(),
                     .show()
             }
             3 -> {
-                onResult = true
-                super.onBackPressed()
+                val clickListener: DialogInterface.OnClickListener =
+                    DialogInterface.OnClickListener { _, _ ->
+                        navController.navigate(R.id.action_global_homeFragment)
+                    }
+
+                AlertDialog.Builder(this@MainActivity)
+                    .setTitle(getString(R.string.alert))
+                    .setMessage(getString(R.string.alert_on))
+                    .setPositiveButton(getString(R.string.ok), clickListener)
+                    .setNegativeButton(getString(R.string.cancel), null)
+                    .show()
+            }
+            6 -> {
+                if (webView?.canGoBack() == true) {
+                    webView?.goBack()
+                } else {
+                    super.onBackPressed()
+                }
             }
             else -> {
                 super.onBackPressed()
@@ -158,7 +189,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, DashboardViewModel>(),
     }
 
     companion object {
-        var onResult: Boolean = false
+        var webView: WebView? = null
     }
 
 }

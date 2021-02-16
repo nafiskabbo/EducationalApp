@@ -7,11 +7,10 @@ import com.kabbodev.educational.R
 import com.kabbodev.educational.data.model.Plan
 import com.kabbodev.educational.databinding.ItemPlanBinding
 
-class PlanAdapter(private val listener: PlansInterface) :
-    RecyclerView.Adapter<PlanAdapter.PlanViewHolder>() {
+class PlanAdapter(private val listener: PlansInterface) : RecyclerView.Adapter<PlanAdapter.PlanViewHolder>() {
 
     private val TAG = "PlanAdapter"
-    private val plansList = ArrayList<Plan>()
+    val plansList = ArrayList<Plan>()
 
     inner class PlanViewHolder(var viewBinding: ItemPlanBinding) :
         RecyclerView.ViewHolder(viewBinding.root)

@@ -12,7 +12,7 @@ import com.kabbodev.educational.R
 import com.kabbodev.educational.data.model.Plan
 import com.kabbodev.educational.data.model.User
 import com.kabbodev.educational.databinding.FragmentSubscriptionBottomSheetBinding
-import com.kabbodev.educational.ui.`interface`.FirebaseCallback
+import com.kabbodev.educational.ui.interfaces.FirebaseCallback
 import com.kabbodev.educational.ui.utils.snackbar
 import com.kabbodev.educational.ui.viewModels.DashboardViewModel
 import com.razorpay.Checkout
@@ -28,15 +28,10 @@ class SubscriptionBottomSheetFragment : BottomSheetDialogFragment(), FirebaseCal
     private var paymentAmount: String? = null
     private var paymentMonth: String? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentSubscriptionBottomSheetBinding.inflate(inflater, container, false)
-        val factory =
-            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
-        viewModel =
-            ViewModelProvider(requireActivity(), factory).get(DashboardViewModel::class.java)
+        val factory = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
+        viewModel = ViewModelProvider(requireActivity(), factory).get(DashboardViewModel::class.java)
         return binding.root
     }
 
@@ -44,11 +39,6 @@ class SubscriptionBottomSheetFragment : BottomSheetDialogFragment(), FirebaseCal
         super.onViewCreated(view, savedInstanceState)
         setupTheme()
         setupClickListeners()
-    }
-
-    override fun onResume() {
-        super.onResume()
-
     }
 
     private fun setupTheme() {
@@ -97,12 +87,12 @@ class SubscriptionBottomSheetFragment : BottomSheetDialogFragment(), FirebaseCal
 
         paymentAmount1Month = plan.price
 
-        binding.title.text = plan.title
-        binding.oneMonth.text = String.format(getString(R.string.rs_month), paymentAmount1Month)
-        binding.threeMonth.text =
-            String.format(getString(R.string.rs_months), (paymentAmount1Month!!.toInt() * 3), "3")
-        binding.sixMonth.text =
-            String.format(getString(R.string.rs_months), (paymentAmount1Month!!.toInt() * 6), "6")
+        with(binding) {
+            title.text = plan.title
+            oneMonth.text = String.format(getString(R.string.rs_month), paymentAmount1Month)
+            threeMonth.text = String.format(getString(R.string.rs_months), (paymentAmount1Month!!.toInt() * 3), "3")
+            sixMonth.text = String.format(getString(R.string.rs_months), (paymentAmount1Month!!.toInt() * 6), "6")
+        }
     }
 
     private fun razorpay() {
@@ -127,13 +117,7 @@ class SubscriptionBottomSheetFragment : BottomSheetDialogFragment(), FirebaseCal
 
     private fun onPaymentSuccess() {
         try {
-            viewModel.saveSubscriptionDetails(
-                viewModel.getUser().value!!,
-                planDetails?.id!!,
-                paymentMonth!!,
-                this
-            )
-
+            viewModel.saveSubscriptionDetails(viewModel.getUser().value!!, planId = planDetails?.id!!, paymentMonth = paymentMonth!!, this)
         } catch (e: Exception) {
             Log.d(TAG, "error ${e.message}")
             this.dismiss()

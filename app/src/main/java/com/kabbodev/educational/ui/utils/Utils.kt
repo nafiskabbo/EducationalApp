@@ -25,11 +25,7 @@ fun View.snackbar(message: String) {
     }.show()
 }
 
-fun startIntent(
-    fromActivity: Activity,
-    toActivity: Class<out Activity>,
-    toFinish: Boolean
-) {
+fun startIntent(fromActivity: Activity, toActivity: Class<out Activity>, toFinish: Boolean) {
     val intent = Intent(fromActivity, toActivity)
     fromActivity.startActivity(intent)
     if (toFinish) {
@@ -37,34 +33,17 @@ fun startIntent(
     }
 }
 
-fun createDialog(
-    context: Context,
-    layoutResId: Int,
-    drawableID: Int,
-    cancellable: Boolean
-): Dialog {
+fun createDialog(context: Context, layoutResId: Int, drawableID: Int, cancellable: Boolean): Dialog {
     val dialog = Dialog(context)
     dialog.setContentView(layoutResId)
     dialog.setCancelable(cancellable)
-    dialog.window?.setBackgroundDrawable(
-        ContextCompat.getDrawable(
-            context,
-            drawableID
-        )
-    )
-    dialog.window?.setLayout(
-        ViewGroup.LayoutParams.WRAP_CONTENT,
-        ViewGroup.LayoutParams.WRAP_CONTENT
-    )
+    dialog.window?.setBackgroundDrawable(ContextCompat.getDrawable(context, drawableID))
+    dialog.window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     return dialog
 }
 
 fun hasPermissions(context: Context, permission: String): Boolean {
-    if (ContextCompat.checkSelfPermission(
-            context,
-            permission
-        ) == PackageManager.PERMISSION_GRANTED
-    ) {
+    if (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED) {
         return true
     }
     return false

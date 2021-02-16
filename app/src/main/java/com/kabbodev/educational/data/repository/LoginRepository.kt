@@ -5,7 +5,7 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.kabbodev.educational.data.model.User
-import com.kabbodev.educational.ui.`interface`.FirebaseCallback
+import com.kabbodev.educational.ui.interfaces.FirebaseCallback
 
 class LoginRepository {
 

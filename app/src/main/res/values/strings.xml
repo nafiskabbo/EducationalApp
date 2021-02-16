@@ -22,6 +22,19 @@
     <string name="register">Register</string>
     <string name="already_have_an_acc">Already have an account? Login!</string>
 
+    <string name="choose_board">Choose Board</string>
+    <string name="choose_class">Choose Class</string>
+    <string name="cbse">CBSE</string>
+    <string name="icse">ICSE</string>
+
+    <string name="six">6</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="ten">10</string>
+    <string name="eleven">11</string>
+    <string name="twelve">12</string>
+
     // login
     <string name="dont_have_acc">Don\'t have an account yet? Join Now!</string>
     <string name="login">Login</string>
@@ -38,6 +51,7 @@
 
     /// home frag
     <string name="start">Start</string>
+    <string name="recap">Recap</string>
 
     <string name="question_code" formatted="false">Question code-%1$s</string>
     <string name="question" formatted="false">%1$s. %2$s</string>
@@ -54,6 +68,8 @@
 
     <!--    on Back Pressed -->
     <string name="alert">Alert!</string>
+    <string name="doubt_alert">Are you sure to add this question in the doubts?</string>
+    <string name="doubt_added">To see your listed doubts, please go to Stats!</string>
     <string name="alert_on">Are you sure to exit from the exam? Without submitting, all your answers will be lost!</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="process_delete" formatted="false">%1$s and it\'s all process will be terminated.</string>
@@ -61,10 +77,13 @@
     <string name="cancel">CANCEL</string>
     <string name="choose_your_chapters">Choose your chapters</string>
     <string name="select_number_of_daily_que">Select number of daily questions</string>
+    <string name="all_doubts">See All Doubts</string>
     <string name="download_excel_report">Download Excel Report</string>
     <string name="daily_task">Daily Task</string>
     <string name="my_doubts">My Doubts</string>
     <string name="my_tests">My Tests</string>
+    <string name="log_out">Log Out</string>
+    <string name="your_all_doubts">Your All Doubts</string>
     <!--    on Back Pressed -->
 
 </resources>

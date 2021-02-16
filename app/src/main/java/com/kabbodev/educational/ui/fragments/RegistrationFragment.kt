@@ -1,45 +1,37 @@
 package com.kabbodev.educational.ui.fragments
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.graphics.Color
-import android.os.Bundle
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
 import android.util.Patterns
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.navigation.NavController
 import androidx.navigation.NavOptions
-import androidx.navigation.Navigation
 import com.kabbodev.educational.R
 import com.kabbodev.educational.data.model.User
 import com.kabbodev.educational.databinding.FragmentRegistrationBinding
-import com.kabbodev.educational.ui.`interface`.FirebaseCallback
+import com.kabbodev.educational.ui.interfaces.FirebaseCallback
 import com.kabbodev.educational.ui.base.BaseFragment
 import com.kabbodev.educational.ui.utils.snackbar
 import com.kabbodev.educational.ui.viewModels.LoginViewModel
 
-class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, LoginViewModel>(),
-    FirebaseCallback {
+class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, LoginViewModel>(), FirebaseCallback {
 
-    private lateinit var navController: NavController
+    private var checkedClass = 0
+    private var checkedClassValueStr: String? = null
+    private var checkedBoard = 0
+    private var checkedBoardValueStr: String? = null
 
-    override fun getFragmentBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ) = FragmentRegistrationBinding.inflate(inflater, container, false)
+    override fun getFragmentBinding(inflater: LayoutInflater, container: ViewGroup?) =
+        FragmentRegistrationBinding.inflate(inflater, container, false)
 
     override fun getViewModel() = LoginViewModel::class.java
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(view)
-        setupTheme()
-        setupClickListeners()
-    }
-
-    private fun setupTheme() {
+    override fun setupTheme() {
         val textWatcher: TextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -57,9 +49,24 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, LoginView
         binding.classEt.editText?.addTextChangedListener(textWatcher)
         binding.passwordEt.editText?.addTextChangedListener(textWatcher)
         binding.confirmPasswordEt.editText?.addTextChangedListener(textWatcher)
+
+        checkedBoardValueStr = getString(R.string.cbse)
+        checkedClassValueStr = "6"
+
+        binding.boardEt.editText?.setText(checkedBoardValueStr.toString())
+        binding.classEt.editText?.setText(checkedClassValueStr.toString())
+
+        binding.boardEt.editText?.inputType = InputType.TYPE_NULL
+        binding.classEt.editText?.inputType = InputType.TYPE_NULL
     }
 
-    private fun setupClickListeners() {
+    override fun setupClickListeners() {
+        binding.classClick.setOnClickListener {
+            showClassAlertDialog()
+        }
+        binding.boardClick.setOnClickListener {
+            showBoardAlertDialog()
+        }
         binding.alreadyHaveAcc.setOnClickListener {
             requireActivity().onBackPressed()
         }
@@ -90,10 +97,72 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, LoginView
         binding.registerBtn.setTextColor(Color.argb(50, 255, 255, 255))
     }
 
-    private fun checkEmailAndPassword() {
-        val customErrorIcon = ContextCompat.getDrawable(requireContext(), R.drawable.error_icon)
-        customErrorIcon!!.setBounds(-16, 0, customErrorIcon.intrinsicWidth - 16, customErrorIcon.intrinsicHeight)
+    private fun showBoardAlertDialog() {
+        val onClick = DialogInterface.OnClickListener { dialog, which ->
+            if (checkedBoard != which) {
+                checkedBoard = which
+                when (which) {
+                    0 -> {
+                        checkedBoardValueStr = getString(R.string.cbse)
+                    }
+                    1 -> {
+                        checkedBoardValueStr = getString(R.string.icse)
+                    }
+                }
+                binding.boardEt.editText?.setText(checkedBoardValueStr)
+            }
+            dialog.dismiss()
+        }
 
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.choose_board))
+            .setSingleChoiceItems(R.array.boardArr, checkedBoard, onClick)
+            .setCancelable(true)
+            .create()
+            .show()
+    }
+
+    private fun showClassAlertDialog() {
+        val onClick = DialogInterface.OnClickListener { dialog, which ->
+            if (checkedClass != which) {
+                checkedClass = which
+                when (which) {
+                    0 -> {
+                        checkedClassValueStr = getString(R.string.six)
+                    }
+                    1 -> {
+                        checkedClassValueStr = getString(R.string.seven)
+                    }
+                    2 -> {
+                        checkedClassValueStr = getString(R.string.eight)
+                    }
+                    3 -> {
+                        checkedClassValueStr = getString(R.string.nine)
+                    }
+                    4 -> {
+                        checkedClassValueStr = getString(R.string.ten)
+                    }
+                    5 -> {
+                        checkedClassValueStr = getString(R.string.eleven)
+                    }
+                    6 -> {
+                        checkedClassValueStr = getString(R.string.twelve)
+                    }
+                }
+                binding.classEt.editText?.setText(checkedClassValueStr)
+            }
+            dialog.dismiss()
+        }
+
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.choose_class))
+            .setSingleChoiceItems(R.array.classArr, checkedClass, onClick)
+            .setCancelable(true)
+            .create()
+            .show()
+    }
+
+    private fun checkEmailAndPassword() {
         if (Patterns.EMAIL_ADDRESS.matcher(binding.emailEt.editText?.text.toString()).matches()) {
             binding.emailEt.isErrorEnabled = false
 
@@ -103,8 +172,8 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, LoginView
                 val user = User(
                     fullName = binding.fullNameEt.editText?.text.toString(),
                     email = binding.emailEt.editText?.text.toString(),
-                    board = binding.boardEt.editText?.text.toString(),
-                    class_ = binding.classEt.editText?.text.toString(),
+                    board = checkedBoardValueStr,
+                    class_ = checkedClassValueStr,
                     password = binding.passwordEt.editText?.text.toString()
                 )
                 binding.registerBtn.startAnimation {
@@ -112,14 +181,16 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, LoginView
                 }
 
             } else {
-                binding.confirmPasswordEt.isErrorEnabled = true
-                binding.confirmPasswordEt.error = getString(R.string.password_doesnt_match)
-                binding.confirmPasswordEt.errorIconDrawable = customErrorIcon
+                with(binding.confirmPasswordEt) {
+                    isErrorEnabled = true
+                    error = getString(R.string.password_doesnt_match)
+                }
             }
         } else {
-            binding.emailEt.isErrorEnabled = true
-            binding.emailEt.error = getString(R.string.invalid_email)
-            binding.emailEt.errorIconDrawable = customErrorIcon
+            with(binding.emailEt) {
+                isErrorEnabled = true
+                error = getString(R.string.invalid_email)
+            }
         }
     }
 

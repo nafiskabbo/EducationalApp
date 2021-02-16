@@ -1,4 +1,4 @@
-package com.kabbodev.educational.ui.`interface`
+package com.kabbodev.educational.ui.interfaces
 
 import com.kabbodev.educational.data.model.Question
 

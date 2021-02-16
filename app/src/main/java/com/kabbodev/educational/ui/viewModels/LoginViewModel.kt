@@ -3,7 +3,7 @@ package com.kabbodev.educational.ui.viewModels
 import androidx.lifecycle.ViewModel
 import com.kabbodev.educational.data.model.User
 import com.kabbodev.educational.data.repository.LoginRepository
-import com.kabbodev.educational.ui.`interface`.FirebaseCallback
+import com.kabbodev.educational.ui.interfaces.FirebaseCallback
 
 class LoginViewModel : ViewModel() {
 

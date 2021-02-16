@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
-import androidx.navigation.fragment.findNavController
 import com.kabbodev.educational.R
 import com.kabbodev.educational.databinding.FragmentSplashBinding
 import com.kabbodev.educational.ui.base.BaseFragment
@@ -16,17 +15,13 @@ import kotlinx.coroutines.withContext
 
 class SplashFragment : BaseFragment<FragmentSplashBinding, DashboardViewModel>() {
 
-    override fun getFragmentBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ) = FragmentSplashBinding.inflate(inflater, container, false)
+    override fun getFragmentBinding(inflater: LayoutInflater, container: ViewGroup?) =
+        FragmentSplashBinding.inflate(inflater, container, false)
 
     override fun getViewModel() = DashboardViewModel::class.java
 
     override fun onResume() {
         super.onResume()
-        val navController = findNavController()
-
         val navOptions = NavOptions.Builder()
             .setEnterAnim(R.anim.slide_in_right)
             .setExitAnim(R.anim.slide_out_left)
@@ -47,5 +42,9 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, DashboardViewModel>()
             }
         }
     }
+
+    override fun setupTheme() {}
+
+    override fun setupClickListeners() {}
 
 }
