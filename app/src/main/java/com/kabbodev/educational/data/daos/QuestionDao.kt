@@ -1,5 +1,6 @@
 package com.kabbodev.educational.data.daos
 
+import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.QuerySnapshot
@@ -24,8 +25,10 @@ class QuestionDao {
 
     fun loadQuestions(selectedChapterIds: ArrayList<String>, selectedQuestionsCount: Int, listener: QuestionCallback) {
         GlobalScope.launch(Dispatchers.IO) {
-
-            val quePerChapter: Int = selectedChapterIds.size / selectedQuestionsCount
+            val quePerChapter: Int = selectedQuestionsCount / selectedChapterIds.size
+            Log.d(TAG, "selectedQuestionsCount $selectedQuestionsCount")
+            Log.d(TAG, "size $selectedChapterIds.size")
+            Log.d(TAG, "que $quePerChapter")
 
             val limitedList: ArrayList<Question> = ArrayList()
 
