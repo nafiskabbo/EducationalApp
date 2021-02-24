@@ -185,18 +185,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, DashboardViewModel>(), Su
 
             withContext(Dispatchers.Main) {
                 list?.let {
-                    Log.d(TAG, "list : $it")
                     arrayList = ArrayList(it)
-                    Log.d(TAG, "list : $arrayList")
                 }
+
                 chapters.forEachIndexed { index, chapter ->
                     val data = KeyPairBoolData()
-                    data.id = index.toLong()
-                    data.name = chapter.name!!.toString()
+                    data.id = chapter.name!!.toLong()
+                    data.name = "${chapter.name!!} (${chapter.chapterName})"
+//                    data.name = chapter.name!!.toString()
                     chapterArray.add(data)
 
                     arrayList?.let {
-                        if (it.contains(data.name)) {
+                        if (it.contains(data.id.toString())) {
                             data.isSelected = true
                         }
                     }
@@ -207,8 +207,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, DashboardViewModel>(), Su
                     selectedChapterNames.clear()
                     for (i in 0 until items.size) {
                         if (items[i].isSelected) {
-                            Log.i(TAG, i.toString() + " : " + items[i].name + " : " + items[i].isSelected)
-                            val itemName = items[i].name.toInt()
+                            Log.d(TAG, i.toString() + " : " + items[i].name + " : " + items[i].isSelected)
+                            val itemName = items[i].id.toInt()
                             selectedChapterIds.add(chapters[itemName - 1].chapterId!!)
                             selectedChapterNames.add(itemName.toString())
                         }

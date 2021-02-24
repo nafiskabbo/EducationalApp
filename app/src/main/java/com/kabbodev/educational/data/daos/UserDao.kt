@@ -70,7 +70,13 @@ class UserDao {
                         } else {
                             i.toString()
                         }
-                        arrayList.add(Chapter(i, document.getString("chapter_${chapterNo}_que_set")))
+                        arrayList.add(
+                            Chapter(
+                                i,
+                                chapterName = document.getString("chapter_${chapterNo}_name"),
+                                document.getString("chapter_${chapterNo}_que_set")
+                            )
+                        )
                     }
 
                     subscriptionsList.add(Subscription(plan = plan, chapter = arrayList))

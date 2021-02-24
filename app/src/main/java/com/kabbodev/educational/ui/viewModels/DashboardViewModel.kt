@@ -6,8 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseUser
 import com.kabbodev.educational.data.daos.UserDao
-import com.kabbodev.educational.data.daos.PlanDao
-import com.kabbodev.educational.data.daos.QuestionDao
 import com.kabbodev.educational.data.model.*
 import com.kabbodev.educational.data.repository.UserRepository
 import com.kabbodev.educational.data.repository.PlanRepository
@@ -38,10 +36,8 @@ class DashboardViewModel : ViewModel() {
     init {
         val userDao = UserDao()
         userRepository = UserRepository(userDao)
-        val planDao = PlanDao()
-        planRepository = PlanRepository(planDao)
-        val questionDao = QuestionDao()
-        questionRepository = QuestionRepository(questionDao)
+        planRepository = PlanRepository()
+        questionRepository = QuestionRepository()
     }
 
     fun getCurrentUser(): FirebaseUser? = userRepository.getCurrentUser()
@@ -55,8 +51,8 @@ class DashboardViewModel : ViewModel() {
         user.value = updated
     }
 
-    fun getPlansList(className: String): LiveData<ArrayList<Plan>> {
-        plansList = planRepository.getPlansList(className)
+    fun getPlansList(className: String, board: String): LiveData<ArrayList<Plan>> {
+        plansList = planRepository.getPlansList(className, board = board)
         return plansList
     }
 
@@ -97,7 +93,7 @@ class DashboardViewModel : ViewModel() {
     }
 
     fun loadQuestionsList(selectedChapterIds: ArrayList<String>, selectedQuestionsCount: Int, listener: QuestionCallback) {
-        questionRepository.loadQuestions(selectedChapterIds, selectedQuestionsCount, listener)
+        questionRepository.getQuestions(selectedChapterIds, selectedQuestionsCount, listener)
     }
 
     fun setUserQueList(newList: ArrayList<Question>) {

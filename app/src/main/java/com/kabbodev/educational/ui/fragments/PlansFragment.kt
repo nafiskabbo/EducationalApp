@@ -1,6 +1,5 @@
 package com.kabbodev.educational.ui.fragments
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,10 +21,11 @@ class PlansFragment : BaseFragment<FragmentPlansBinding, DashboardViewModel>(), 
 
     override fun setupTheme() {
         initRecyclerView()
-        val userClass = viewModel.getUser().value?.class_
-        viewModel.getPlansList(userClass!!).observe(viewLifecycleOwner, { list ->
+        val user = viewModel.getUser().value
+        val userClass = user?.class_
+        val userBoard = user?.board
+        viewModel.getPlansList(userClass!!, board = userBoard!!).observe(viewLifecycleOwner, { list ->
             list?.let {
-                Log.d("AYAN", "list ${it.size} $it")
                 adapter.updateList(it)
             }
         })

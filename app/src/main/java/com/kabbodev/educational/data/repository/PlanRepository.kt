@@ -1,20 +1,47 @@
 package com.kabbodev.educational.data.repository
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.kabbodev.educational.data.daos.PlanDao
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.kabbodev.educational.data.model.Plan
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
-class PlanRepository(private val planDao: PlanDao) {
+class PlanRepository {
+
+    private val TAG = "plan"
+    private val firebaseFirestore = Firebase.firestore
+    private val plansCollection: CollectionReference = firebaseFirestore.collection("Plans")
 
     private val plansList: ArrayList<Plan> = ArrayList()
     private val liveData: MutableLiveData<ArrayList<Plan>> = MutableLiveData()
 
-    fun getPlansList(className: String): MutableLiveData<ArrayList<Plan>> {
+
+    fun getPlansList(className: String, board: String): MutableLiveData<ArrayList<Plan>> {
         if (plansList.size == 0) {
-            planDao.loadAllPlansList(plansList, liveData, className)
+            loadAllPlansList(plansList, liveData, className, board = board)
         }
         liveData.postValue(plansList)
         return liveData
+    }
+
+    private fun loadAllPlansList(plansList: ArrayList<Plan>, liveData: MutableLiveData<ArrayList<Plan>>, className: String, board: String) {
+        GlobalScope.launch(Dispatchers.IO) {
+            val task = plansCollection.get().await()
+
+            plansList.clear()
+            task.documents.forEach { document ->
+                Log.d(TAG, "class ${task.documents.size}")
+                if (document.getString("class_name") == className && document.getString("board") == board) {
+                    plansList.add(document.toObject(Plan::class.java)!!)
+                }
+            }
+            liveData.postValue(plansList)
+        }
     }
 
 }

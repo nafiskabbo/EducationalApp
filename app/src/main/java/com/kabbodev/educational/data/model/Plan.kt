@@ -6,6 +6,7 @@ data class Plan(
     var title: String? = "",
     var subtitle: String? = "",
     var class_name: String? = "",
+    var board: String? = "",
     var price: String? = "",
     var chapter_set: String? = "",
     var contact_info: String? = "",
