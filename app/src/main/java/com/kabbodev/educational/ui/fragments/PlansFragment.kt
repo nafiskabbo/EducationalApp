@@ -49,12 +49,13 @@ class PlansFragment : BaseFragment<FragmentPlansBinding, DashboardViewModel>(), 
     }
 
     override fun onBtnClick(itemPos: Int) {
-        viewModel.setSelectedPlan(itemPos)
-        if (adapter.plansList[itemPos].type == "Join") {
-            navController.navigate(R.id.action_navigation_plan_to_plansDetailFragment)
-        } else {
-            navController.navigate(R.id.action_global_subscriptionBottomSheetFragment)
-        }
+        onViewClick(itemPos)
+//        viewModel.setSelectedPlan(itemPos)
+//        if (adapter.plansList[itemPos].type == "Join") {
+//            navController.navigate(R.id.action_navigation_plan_to_plansDetailFragment)
+//        } else {
+//            navController.navigate(R.id.action_global_subscriptionBottomSheetFragment)
+//        }
     }
 
 }

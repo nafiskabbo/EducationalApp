@@ -1,5 +1,6 @@
 package com.kabbodev.educational.data.repository
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseUser
 import com.kabbodev.educational.data.daos.UserDao
@@ -31,13 +32,22 @@ class UserRepository(private val userDao: UserDao) {
         return userLiveData
     }
 
-    fun getSubscriptionsList(updatedSubscriptionsList: List<String>): MutableLiveData<ArrayList<Subscription>> {
-        if (subscriptionsList.size == 0) {
+    fun getSubscriptionsList(update: Boolean, updatedSubscriptionsList: List<String>): MutableLiveData<ArrayList<Subscription>> {
+        if (update) {
             userDao.loadAllSubscriptionsList(
                 subscriptionsList,
                 subscriptionLiveData,
                 updatedSubscriptionsList
             )
+            Log.d("AAA", "$subscriptionsList")
+        } else {
+            if (subscriptionsList.size == 0) {
+                userDao.loadAllSubscriptionsList(
+                    subscriptionsList,
+                    subscriptionLiveData,
+                    updatedSubscriptionsList
+                )
+            }
         }
         subscriptionLiveData.value = subscriptionsList
         return subscriptionLiveData

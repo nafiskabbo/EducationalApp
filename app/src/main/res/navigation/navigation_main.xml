@@ -156,11 +156,6 @@
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
-    <dialog
-        android:id="@+id/subscriptionBottomSheetFragment"
-        android:name="com.kabbodev.educational.ui.fragments.SubscriptionBottomSheetFragment"
-        tools:layout="@layout/fragment_subscription_bottom_sheet" />
-
     <action
         android:id="@+id/action_global_homeFragment"
         app:destination="@id/navigation_home"
@@ -168,12 +163,6 @@
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right" />
-
-    <action
-        android:id="@+id/action_global_subscriptionBottomSheetFragment"
-        app:destination="@id/subscriptionBottomSheetFragment"
-        app:popUpTo="@id/subscriptionBottomSheetFragment"
-        app:popUpToInclusive="true" />
 
     <fragment
         android:id="@+id/doubtListFragment"

@@ -19,6 +19,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
@@ -49,6 +51,7 @@ class UserDao {
         updatedSubscriptionsList: List<String>
     ) {
         GlobalScope.launch(Dispatchers.IO) {
+            subscriptionsList.clear()
             updatedSubscriptionsList.forEach {
                 Log.d(TAG, "subscriptionsList size : ${subscriptionsList.size}")
                 Log.d(TAG, "updatedSubscriptionsList : $updatedSubscriptionsList")
@@ -101,6 +104,19 @@ class UserDao {
         monthList.addAll(user.subscriptionsMonth)
         monthList.add(paymentMonth)
 
+        val calendar = Calendar.getInstance()
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+
+        val createdList: ArrayList<String> = ArrayList()
+        createdList.addAll(user.subscriptionsCreatedDate)
+        createdList.add(dateFormat.format(calendar.time))
+
+        calendar.add(Calendar.MONTH, paymentMonth.toInt())
+
+        val endedList: ArrayList<String> = ArrayList()
+        endedList.addAll(user.subscriptionsEndDate)
+        endedList.add(dateFormat.format(calendar.time))
+
         val updated = User(
             fullName = user.fullName,
             email = user.email,
@@ -108,7 +124,9 @@ class UserDao {
             class_ = user.class_,
             password = user.password,
             subscriptions = newList,
-            subscriptionsMonth = monthList
+            subscriptionsMonth = monthList,
+            subscriptionsCreatedDate = createdList,
+            subscriptionsEndDate = endedList
         )
 
         userCollection.document(getCurrentUser()!!.uid).set(updated)

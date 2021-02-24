@@ -30,6 +30,7 @@ class DashboardViewModel : ViewModel() {
     private var plansList: MutableLiveData<ArrayList<Plan>> = MutableLiveData()
     private var mutablePlan: MutableLiveData<Plan> = MutableLiveData()
 
+    private var updateData: Boolean = false
     private val onSuccess: MutableLiveData<Boolean> = MutableLiveData()
     private val onError: MutableLiveData<Boolean> = MutableLiveData()
 
@@ -43,12 +44,18 @@ class DashboardViewModel : ViewModel() {
     fun getCurrentUser(): FirebaseUser? = userRepository.getCurrentUser()
 
     fun getUser(): LiveData<User> {
-        user = userRepository.getUser()
+        Log.d("Aan", "$updateData ${user.value}")
+        if (!updateData) {
+            user = userRepository.getUser()
+        }
         return user
     }
 
     fun setUser(updated: User) {
+        Log.d("Aan", "updated $updated")
+        updateData = true
         user.value = updated
+        Log.d("Aan", "updated ${user.value}")
     }
 
     fun getPlansList(className: String, board: String): LiveData<ArrayList<Plan>> {
@@ -81,7 +88,7 @@ class DashboardViewModel : ViewModel() {
     fun getQuestionsListByRecap() = queByUserList
 
     fun loadPlanDetail(updatedSubscriptionsList: List<String>): LiveData<ArrayList<Subscription>> {
-        subscriptionsList = userRepository.getSubscriptionsList(updatedSubscriptionsList)
+        subscriptionsList = userRepository.getSubscriptionsList(updateData, updatedSubscriptionsList)
         return subscriptionsList
     }
 

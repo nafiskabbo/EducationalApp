@@ -7,5 +7,7 @@ data class User(
     val class_: String? = "",
     val password: String? = "",
     val subscriptions: List<String> = emptyList(),
-    val subscriptionsMonth: List<String> = emptyList()
+    val subscriptionsMonth: List<String> = emptyList(),
+    val subscriptionsCreatedDate: List<String> = emptyList(),
+    val subscriptionsEndDate: List<String> = emptyList()
 )

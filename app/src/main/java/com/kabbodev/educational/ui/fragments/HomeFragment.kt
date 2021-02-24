@@ -29,6 +29,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, DashboardViewModel>(), SubscriptionInterface, QuestionCallback {
 
@@ -127,11 +130,25 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, DashboardViewModel>(), Su
             binding.noSubscriptions.visibility = View.VISIBLE
             binding.recyclerView.visibility = View.GONE
         } else {
+            val arrayList : ArrayList<String> = ArrayList()
+            arrayList.addAll(user.subscriptions)
+
             binding.illustration.visibility = View.GONE
             binding.noSubscriptions.visibility = View.GONE
             binding.recyclerView.visibility = View.VISIBLE
 
-            viewModel.loadPlanDetail(user.subscriptions).observe(viewLifecycleOwner, { list ->
+            val calendar = Calendar.getInstance()
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+            val currentTime = calendar.time
+
+            user.subscriptionsEndDate.forEachIndexed { index, dateEnd ->
+                val endDate: Date = dateFormat.parse(dateEnd)!!
+                if (currentTime.after(endDate)) {
+                    arrayList.removeAt(index)
+                }
+            }
+
+            viewModel.loadPlanDetail(arrayList).observe(viewLifecycleOwner, { list ->
                 list?.let {
                     adapter.updateList(it)
                 }

@@ -5,10 +5,14 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Point
+import android.os.Build
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
 
 fun View.snackbar(message: String) {
@@ -39,6 +43,17 @@ fun createDialog(context: Context, layoutResId: Int, drawableID: Int, cancellabl
     dialog.setCancelable(cancellable)
     dialog.window?.setBackgroundDrawable(ContextCompat.getDrawable(context, drawableID))
     dialog.window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+    return dialog
+}
+
+fun createDialog(layoutResViewBinding: ViewBinding, drawableID: Int, cancellable: Boolean): Dialog {
+    val dialog = Dialog(layoutResViewBinding.root.context)
+    with(dialog) {
+        setContentView(layoutResViewBinding.root)
+        setCancelable(cancellable)
+        window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        window?.setBackgroundDrawable(ContextCompat.getDrawable(layoutResViewBinding.root.context, drawableID))
+    }
     return dialog
 }
 
