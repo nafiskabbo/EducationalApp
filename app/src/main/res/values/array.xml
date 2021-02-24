@@ -2,6 +2,7 @@
 <resources>
 
     <string-array name="boardArr">
+        <item>SSC</item>
         <item>CBSE</item>
         <item>ICSE</item>
     </string-array>

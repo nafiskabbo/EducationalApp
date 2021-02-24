@@ -33,15 +33,13 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, LoginView
 
     override fun setupTheme() {
         val textWatcher: TextWatcher = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 checkInputs()
             }
 
-            override fun afterTextChanged(s: Editable?) {
-            }
+            override fun afterTextChanged(s: Editable?) {}
         }
         binding.fullNameEt.editText?.addTextChangedListener(textWatcher)
         binding.emailEt.editText?.addTextChangedListener(textWatcher)
@@ -50,7 +48,7 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, LoginView
         binding.passwordEt.editText?.addTextChangedListener(textWatcher)
         binding.confirmPasswordEt.editText?.addTextChangedListener(textWatcher)
 
-        checkedBoardValueStr = getString(R.string.cbse)
+        checkedBoardValueStr = getString(R.string.ssc)
         checkedClassValueStr = "6"
 
         binding.boardEt.editText?.setText(checkedBoardValueStr.toString())
@@ -85,12 +83,7 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, LoginView
             binding.confirmPasswordEt.editText?.text!!.isNotEmpty()
         ) {
             binding.registerBtn.isEnabled = true
-            binding.registerBtn.setTextColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.white
-                )
-            )
+            binding.registerBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
             return
         }
         binding.registerBtn.isEnabled = false
@@ -103,9 +96,12 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, LoginView
                 checkedBoard = which
                 when (which) {
                     0 -> {
-                        checkedBoardValueStr = getString(R.string.cbse)
+                        checkedBoardValueStr = getString(R.string.ssc)
                     }
                     1 -> {
+                        checkedBoardValueStr = getString(R.string.cbse)
+                    }
+                    2 -> {
                         checkedBoardValueStr = getString(R.string.icse)
                     }
                 }
