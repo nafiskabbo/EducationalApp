@@ -57,7 +57,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, DashboardViewModel>(), Pa
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_plan, R.id.navigation_stats
+                R.id.navigation_home, R.id.navigation_plan, R.id.navigation_doubts
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

@@ -7,22 +7,22 @@ import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kabbodev.educational.R
 import com.kabbodev.educational.data.model.Doubt
-import com.kabbodev.educational.databinding.FragmentDoubtListBinding
-import com.kabbodev.educational.ui.interfaces.DoubtCallback
+import com.kabbodev.educational.databinding.FragmentDoubtsBinding
 import com.kabbodev.educational.ui.adapters.DoubtAdapter
 import com.kabbodev.educational.ui.adapters.DoubtInterface
 import com.kabbodev.educational.ui.base.BaseFragment
+import com.kabbodev.educational.ui.interfaces.DoubtCallback
 import com.kabbodev.educational.ui.utils.createDialog
 import com.kabbodev.educational.ui.utils.snackbar
 import com.kabbodev.educational.ui.viewModels.DashboardViewModel
 
-class DoubtListFragment : BaseFragment<FragmentDoubtListBinding, DashboardViewModel>(), DoubtInterface, DoubtCallback {
+class DoubtsFragment : BaseFragment<FragmentDoubtsBinding, DashboardViewModel>(), DoubtInterface, DoubtCallback {
 
     private lateinit var adapter: DoubtAdapter
     private lateinit var loadingDialog: Dialog
 
     override fun getFragmentBinding(inflater: LayoutInflater, container: ViewGroup?) =
-        FragmentDoubtListBinding.inflate(inflater, container, false)
+        FragmentDoubtsBinding.inflate(inflater, container, false)
 
     override fun getViewModel() = DashboardViewModel::class.java
 
@@ -47,7 +47,7 @@ class DoubtListFragment : BaseFragment<FragmentDoubtListBinding, DashboardViewMo
 
     override fun onInfoBtnClick(itemPos: Int) {
         navController.navigate(
-            R.id.action_doubtListFragment_to_doubtViewFragment,
+            R.id.action_navigation_doubts_to_doubtViewFragment,
             bundleOf("que_solve_link" to adapter.doubtList[itemPos].solveLink)
         )
     }

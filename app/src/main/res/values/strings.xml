@@ -1,11 +1,10 @@
 <resources>
     <string name="app_name">Emadmaths</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     // navigation
     <string name="title_home">Home</string>
     <string name="title_plans">Plans</string>
-    <string name="title_stats">Stats</string>
+    <string name="title_doubts">Doubts</string>
 
     // registration
     <string name="registration">Registration</string>
@@ -79,12 +78,8 @@
     <string name="choose_your_chapters">Choose your chapters</string>
     <string name="select_number_of_daily_que">Select number of daily questions</string>
     <string name="all_doubts">See All Doubts</string>
-    <string name="download_excel_report">Download Excel Report</string>
-    <string name="daily_task">Daily Task</string>
-    <string name="my_doubts">My Doubts</string>
-    <string name="my_tests">My Tests</string>
-    <string name="log_out">Log Out</string>
     <string name="your_all_doubts">Your All Doubts</string>
+    <string name="log_out">Log Out</string>
     <!--    on Back Pressed -->
 
 </resources>

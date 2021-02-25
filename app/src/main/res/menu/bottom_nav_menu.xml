@@ -12,8 +12,8 @@
         android:title="@string/title_plans" />
 
     <item
-        android:id="@+id/navigation_stats"
+        android:id="@+id/navigation_doubts"
         android:icon="@drawable/ic_stats"
-        android:title="@string/title_stats" />
+        android:title="@string/title_doubts" />
 
 </menu>

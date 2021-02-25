@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.DoubtListFragment">
+    tools:context=".ui.fragments.DoubtsFragment">
 
     <TextView
         android:id="@+id/textView8"
@@ -15,8 +15,8 @@
         android:layout_marginEnd="16dp"
         android:text="@string/your_all_doubts"
         android:textColor="@color/blue"
-        android:textStyle="bold"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

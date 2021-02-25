@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.kabbodev.educational.R
 import com.kabbodev.educational.data.model.Plan
 import com.kabbodev.educational.data.model.User
@@ -17,8 +16,6 @@ import com.kabbodev.educational.ui.utils.createDialog
 import com.kabbodev.educational.ui.utils.snackbar
 import com.kabbodev.educational.ui.viewModels.DashboardViewModel
 import com.razorpay.Checkout
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import org.json.JSONObject
 
 class PlansDetailFragment : BaseFragment<FragmentPlansDetailBinding, DashboardViewModel>(), FirebaseCallback {
